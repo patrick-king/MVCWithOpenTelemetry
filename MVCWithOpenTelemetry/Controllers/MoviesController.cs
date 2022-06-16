@@ -12,10 +12,12 @@ namespace MVCWithOpenTelemetry.Controllers
     public class MoviesController : Controller
     {
         private readonly MvcMovieContext _context;
-
-        public MoviesController(MvcMovieContext context)
+        private InstrumentationHelper _instrumentationHelper;
+        public MoviesController(MvcMovieContext context, 
+            InstrumentationHelper instrumentation)
         {
             _context = context;
+            _instrumentationHelper = instrumentation;
         }
 
         // GET: Movies
@@ -61,6 +63,7 @@ namespace MVCWithOpenTelemetry.Controllers
             {
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
+                _instrumentationHelper.MoviesAddedCounter.Add(1);
                 return RedirectToAction(nameof(Index));
             }
             return View(movie);
@@ -148,9 +151,10 @@ namespace MVCWithOpenTelemetry.Controllers
             if (movie != null)
             {
                 _context.Movies.Remove(movie);
+                
+                await _context.SaveChangesAsync();
+                
             }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

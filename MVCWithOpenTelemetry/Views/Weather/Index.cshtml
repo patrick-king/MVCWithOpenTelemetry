@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WeatherSvc.WeatherForecast>
+
+@{
+    string city = Model.First().LocationId;
+
+    
+}
+Weather for @city:
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+                Summary
+            </th>
+            <th>
+                &#176;C
+            </th>
+            <th>
+                &#176;F
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TemperatureC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TemperatureF)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

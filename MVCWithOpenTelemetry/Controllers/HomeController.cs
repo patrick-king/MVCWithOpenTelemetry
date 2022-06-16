@@ -20,6 +20,7 @@ namespace MVCWithOpenTelemetry.Controllers
 
         public IActionResult Privacy()
         {
+            _logger.Log(LogLevel.Information, "Viewing Privacy Policy");
             return View();
         }
 
@@ -27,6 +28,11 @@ namespace MVCWithOpenTelemetry.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult GenerateError()
+        {
+            throw new ApplicationException("Unable to understand this request. An Exception is being thrown");
         }
     }
 }

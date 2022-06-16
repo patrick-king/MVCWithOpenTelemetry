@@ -6,3 +6,19 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div>
+    <h2>Get Weather</h2>
+    <form method="post" asp-action="Detail" asp-controller="Weather">
+        <div class="form-text">
+            <input type="text" name="city" />
+        </div>
+        
+        <input type="submit" title="Get Weather"/>
+    </form>
+    
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Movies">Manage Movies Database</a>
+</div>
