@@ -143,17 +143,21 @@ namespace MVCWithOpenTelemetry.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Movies == null)
+            //Example of custom activity tracing
+            using (var da = _instrumentationHelper.MyActivitySource.CreateActivity("Delete Movie", System.Diagnostics.ActivityKind.Server))
             {
-                return Problem("Entity set 'MvcMovieContext.Movies'  is null.");
-            }
-            var movie = await _context.Movies.FindAsync(id);
-            if (movie != null)
-            {
-                _context.Movies.Remove(movie);
-                
-                await _context.SaveChangesAsync();
-                
+                if (_context.Movies == null)
+                {
+                    return Problem("Entity set 'MvcMovieContext.Movies'  is null.");
+                }
+                var movie = await _context.Movies.FindAsync(id);
+                if (movie != null)
+                {
+                    _context.Movies.Remove(movie);
+
+                    await _context.SaveChangesAsync();
+
+                }
             }
             return RedirectToAction(nameof(Index));
         }
