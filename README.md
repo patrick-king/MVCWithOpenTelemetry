@@ -4,10 +4,10 @@ It's dependencies are:
 1. Start the MoviesAPI before you start the MVCWithOpenTelemetry app to be able to get the weather to work
 2. You need a SQL database to get the movies controller to work. It can be a local sql server, sql express, or azure sql
 	1. Create a sql database somewhere
-	2. migrate the application's ef context to the sql database https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
+	2. Migrate the application's ef context to the sql database https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
 3. You need an Application Insights instance for the Azure Monitor export to work. You can create those for free in Azure (portal.azure.com).
 	1. Create an appinsights resource in azure
-	2. copy the connection string for that resource to your appsettings.json AppSettings.AppInsightsCN key.
+	2. Copy the connection string for that resource to your appsettings.json AppSettings.AppInsightsCN key.
 
 
 ## Demo points
